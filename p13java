@@ -1,0 +1,18 @@
+
+import java.util.Arrays;
+public class practice{
+    public static void main(String[] str) {
+        if (str.length < 1) {
+            System.out.println("Usage: java SortStrings string1 string2 ...");
+            return;
+        }
+
+        Arrays.sort(str);
+
+        System.out.print("Sorted strings: ");
+        for (String s :str) {
+            System.out.print(s + " ");
+        }
+        System.out.println();
+    }
+}
