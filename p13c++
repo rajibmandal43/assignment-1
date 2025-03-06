@@ -1,0 +1,16 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main(int argc, char* argv[]) {
+    if (argc < 2) {
+        cout << "Usage: " << argv[0] << " string1 string2 ...\n";
+        return 1;
+    }
+    vector<string>v(argv + 1, argv + argc);
+    sort(v.begin(), v.end());
+    cout << "Sorted strings: ";
+    for (auto it: v) {
+        cout <<it<< " ";
+    }
+   cout<<endl;
+    return 0;
+}
