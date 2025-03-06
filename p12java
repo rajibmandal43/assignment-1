@@ -1,0 +1,17 @@
+public class practice{
+    public static void main(String[] s) {
+        if (s.length != 1) {
+            System.out.println("Usage: java PalindromeCheck number");
+            return;
+        }
+
+        String s1=s[0];
+        String s2= new StringBuilder(s1).reverse().toString();
+
+        if (s1.equals(s2)) {
+            System.out.println(s1 + " is a palindrome");
+        } else {
+            System.out.println(s1+ " is not a palindrome");
+        }
+    }
+}
