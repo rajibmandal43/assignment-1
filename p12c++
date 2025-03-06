@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+bool f(int num) {
+    string str = to_string(num);
+    string rev = str;
+    reverse(rev.begin(), rev.end());
+    return (str==rev);
+}
+
+int main(int argc, char* argv[]) {
+    if (argc != 2) {
+        cout << "Usage: " << argv[0] << " number\n";
+        return 1;
+    }
+    
+    int num = atoi(argv[1]);
+    if (f(num)) {
+        cout << num << " is a palindrome\n";
+    } else {
+        cout << num << " is not a palindrome\n";
+    }
+    return 0;
+}
