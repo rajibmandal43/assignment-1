@@ -1,0 +1,126 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Student {
+public:
+    string name;
+    int rollNumber;
+    string department;
+    float avgMarks;
+
+    Student() {}
+    
+    Student(string name, int rollNumber, string department, float avgMarks) {
+        this->name = name;
+        this->rollNumber = rollNumber;
+        this->department = department;
+        this->avgMarks = avgMarks;
+    }
+    void display() {
+    cout << "Roll No: " << rollNumber << ", Name: " << name<< ", Department: " << department << ", Avg Marks: " << avgMarks << endl;
+    }
+};
+
+class StudentList {
+private:
+    Student *arr;
+    int size;
+    int n;
+public:
+    StudentList(int maxSize) {
+        size = maxSize;
+        arr = new Student[size];
+        n = 0;
+    }
+
+    void addStudent(string name, int rollNumber, string department, float avgMarks) {
+        if (n < size) {
+            arr[n++] = Student(name, rollNumber, department, avgMarks);
+        } else {
+            cout << "Student list is full!" << endl;
+        }
+    }
+
+    void displayAll() {
+        for (int i = 0; i <=n-1; i++) {
+            arr[i].display();
+        }
+    }
+
+    void searchStudent(int rollNumber) {
+        for (int i = 0; i<=n-1; i++) {
+            if (arr[i].rollNumber == rollNumber) {
+                cout << "Student found: ";
+                arr[i].display();
+                return;
+            }
+        }
+        cout << "Student not found!" << endl;
+    }
+
+    void sortStudents() {
+        sort(arr, arr + n, [](Student a, Student b) {
+            return a.rollNumber < b.rollNumber;
+        });
+        cout << "Students sorted by Roll Number." << endl;
+    }
+
+    void deleteStudent(int rollNumber) {
+        for (int i = 0; i <=n-1; i++) {
+            if (arr[i].rollNumber == rollNumber) {
+                for (int j = i; j < n - 1; j++) {
+                    arr[j] = arr[j + 1];
+                }
+                n--;
+                cout << "Student deleted successfully!" << endl;
+                return;
+            }
+        }
+        cout << "Student not found!" << endl;
+    }
+
+    ~StudentList() {
+        delete[] arr;
+    }
+};
+
+int main() {
+    StudentList studentList(100);
+    int choice, roll;
+    string name, dept;
+    float marks;
+ do {
+cout << "\n1. Add Student\n2. Display All Students\n3. Search Student\n4. Sort Students\n5. Delete Student\n6. Exit\nEnter choice: ";
+cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter Name, Roll Number, Department, Avg Marks: ";
+                cin >> name >> roll >> dept >> marks;
+                studentList.addStudent(name, roll, dept, marks);
+                break;
+            case 2:
+                studentList.displayAll();
+                break;
+            case 3:
+                cout << "Enter Roll Number: ";
+                cin >> roll;
+                studentList.searchStudent(roll);
+                break;
+            case 4:
+                studentList.sortStudents();
+                break;
+            case 5:
+                cout << "Enter Roll Number to delete: ";
+                cin >> roll;
+                studentList.deleteStudent(roll);
+                break;
+            case 6:
+                cout << "Exiting..." << endl;
+                break;
+            default:
+                cout << "Invalid choice!" << endl;
+        }
+    } while (choice != 6);
+
+    return 0;
+}
