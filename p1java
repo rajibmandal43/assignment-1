@@ -1,0 +1,18 @@
+
+public class practice {
+    public static void main(String[] s) {
+        if (s.length != 3) {
+            System.out.println("Usage: java LargestNumber num1 num2 num3");
+            return;
+        }
+
+        int a = Integer.parseInt(s[0]);
+        int b = Integer.parseInt(s[1]);
+        int c = Integer.parseInt(s[2]);
+
+        int largest = Math.max(a, Math.max(b, c));
+
+        System.out.println("Largest number: " + largest);
+    }
+}
+
