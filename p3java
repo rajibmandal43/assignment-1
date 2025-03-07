@@ -1,0 +1,119 @@
+import java.util.*;
+class Student {
+    String name;
+    int rollNumber;
+    String department;
+    float avgMarks;
+
+    Student(String name, int rollNumber, String department, float avgMarks) {
+        this.name = name;
+        this.rollNumber = rollNumber;
+        this.department = department;
+        this.avgMarks = avgMarks;
+    }
+
+    void display() {
+        System.out.println("Roll No: " + rollNumber + ", Name: " + name + ", Department: " + department + ", Avg Marks: " + avgMarks);
+    }
+}
+
+public class practice{
+    static Student[] arr;
+    static int size;
+    static int n;
+
+    static{
+        size = 100;
+        arr = new Student[size];
+        n = 0;
+    }
+
+    static void addStudent(String name, int rollNumber, String department, float avgMarks) {
+        if (n < size) {
+            arr[n++] = new Student(name, rollNumber, department, avgMarks);
+        } else {
+            System.out.println("Student list is full!");
+        }
+    }
+
+    static void displayAll() {
+        for (int i = 0; i<=n-1; i++) {
+            arr[i].display();
+        }
+    }
+
+    static void searchStudent(int rollNumber) {
+        for (int i = 0; i <=n-1; i++) {
+            if (arr[i].rollNumber == rollNumber) {
+                arr[i].display();
+                return;
+            }
+        }
+        System.out.println("Student not found!");
+    }
+
+    static void sortStudents() {
+        Arrays.sort(arr, 0, n, Comparator.comparingInt(x -> x.rollNumber));
+        System.out.println("Students sorted by Roll Number.");
+    }
+
+    static void deleteStudent(int rollNumber) {
+        for (int i = 0; i <=n-1; i++) {
+            if (arr[i].rollNumber == rollNumber) {
+                for (int j = i; j < n - 1; j++) {
+                    arr[j] = arr[j + 1];
+                }
+                n--;
+                System.out.println("Student deleted successfully!");
+                return;
+            }
+        }
+        System.out.println("Student not found!");
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int choice, roll;
+        String name, dept;
+        float marks;
+
+do {
+System.out.println("\n1.Add Student\n2.Display All Students\n3.Search Student\n4.Sort Students\n5.Delete Student\n6.Exit\nEnter choice:");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter Name, Roll Number, Department, Avg Marks: ");
+                    name = sc.next();
+                    roll = sc.nextInt();
+                    dept = sc.next();
+                    marks = sc.nextFloat();
+                    addStudent(name, roll, dept, marks);
+                    break;
+                case 2:
+                    displayAll();
+                    break;
+                case 3:
+                    System.out.println("Enter Roll Number: ");
+                    roll = sc.nextInt();
+                    searchStudent(roll);
+                    break;
+                case 4:
+                    sortStudents();
+                    break;
+                case 5:
+                    System.out.println("Enter Roll Number to delete:");
+                    roll = sc.nextInt();
+                    deleteStudent(roll);
+                    break;
+                case 6:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        } while (choice != 6);
+
+        sc.close();
+    }
+}
